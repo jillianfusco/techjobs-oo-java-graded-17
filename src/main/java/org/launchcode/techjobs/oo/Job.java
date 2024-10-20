@@ -48,9 +48,24 @@ public class Job {
     }
 
 
-    // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
-    //  and id.
+    @Override
+    public String toString() {
+        String newLine = System.lineSeparator();
 
+        return newLine +
+                "ID: " + this.getId() + newLine +
+                "Name: " + handleEmptyField(this.getName()) + newLine +
+                "Employer: " + handleEmptyField(this.getEmployer().toString()) + newLine +
+                "Location: " + handleEmptyField(this.getLocation().toString()) + newLine +
+                "Position Type: " + handleEmptyField(this.getPositionType().toString()) + newLine +
+                "Core Competency: " + handleEmptyField(this.getCoreCompetency().toString()) +
+                newLine;
+
+    }
+
+    String handleEmptyField(String value) {
+        return (value == null || value.trim().isEmpty()) ? "Data not available" : value;
+    }
 
     public int getId() {
         return id;

@@ -47,4 +47,65 @@ public class JobTest {
         assertFalse(job1.equals(job2));
     }
 
+    @Test
+    public void testToStringStartsAndEndsWithNewLine() {
+        Job job = new Job(
+                "Software Developer",
+                new Employer("LaunchCode"),
+                new Location("St. Louis"),
+                new PositionType("Full-Time"),
+                new CoreCompetency("Java"));
+
+        assertEquals(System.lineSeparator(), job.toString().substring(0, System.lineSeparator().length()));
+        assertEquals(System.lineSeparator(),
+                job.toString().substring(job.toString().length() - System.lineSeparator().length()));
+    }
+
+    @Test
+    public void testToStringContainsCorrectLabelsAndData() {
+        Job job = new Job(
+                "Software Developer",
+                new Employer("LaunchCode"),
+                new Location("St. Louis"),
+                new PositionType("Full-Time"),
+                new CoreCompetency("Java"));
+
+        String newLine = System.lineSeparator();
+
+        String expectedOutput =
+                         newLine + "ID: " + job.getId() + newLine +
+                        "Name: Software Developer" + newLine +
+                        "Employer: LaunchCode" + newLine +
+                        "Location: St. Louis" + newLine +
+                        "Position Type: Full-Time" + newLine +
+                        "Core Competency: Java" + newLine;
+
+        String actualOutput = job.toString();
+
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void testToStringHandlesEmptyField() {
+        Job job = new Job(
+                "Software Developer",
+                new Employer(""),
+                new Location("Philadelphia"),
+                new PositionType("Full-Time"),
+                new CoreCompetency("JavaScript"));
+
+        String newLine = System.lineSeparator();
+
+        String expectedOutput =
+                newLine + "ID: " + job.getId() + newLine +
+                        "Name: Software Developer" + newLine +
+                        "Employer: Data not available" + newLine +
+                        "Location: Philadelphia" + newLine +
+                        "Position Type: Full-Time" + newLine +
+                        "Core Competency: JavaScript" + newLine;
+
+        String actualOutput = job.toString();
+
+        assertEquals(expectedOutput, actualOutput);
+    }
 }
