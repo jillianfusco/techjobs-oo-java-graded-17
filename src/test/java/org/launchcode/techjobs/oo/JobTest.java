@@ -56,9 +56,16 @@ public class JobTest {
                 new PositionType("Full-Time"),
                 new CoreCompetency("Java"));
 
-        assertEquals(System.lineSeparator(), job.toString().substring(0, System.lineSeparator().length()));
-        assertEquals(System.lineSeparator(),
-                job.toString().substring(job.toString().length() - System.lineSeparator().length()));
+        String resultString = job.toString();
+        String newLine = System.lineSeparator();
+
+        //extracts from beginning of the string until the end of the newLine
+        String firstLine = resultString.substring(0, newLine.length());
+        //extracts from the end of string minus the new line
+        String lastLine = resultString.substring(resultString.length() - newLine.length());
+
+        assertEquals(newLine, firstLine);
+        assertEquals(newLine, lastLine);
     }
 
     @Test
@@ -91,7 +98,7 @@ public class JobTest {
                 "Software Developer",
                 new Employer(""),
                 new Location("Philadelphia"),
-                new PositionType("Full-Time"),
+                new PositionType(null),
                 new CoreCompetency("JavaScript"));
 
         String newLine = System.lineSeparator();
@@ -101,7 +108,7 @@ public class JobTest {
                         "Name: Software Developer" + newLine +
                         "Employer: Data not available" + newLine +
                         "Location: Philadelphia" + newLine +
-                        "Position Type: Full-Time" + newLine +
+                        "Position Type: Data not available" + newLine +
                         "Core Competency: JavaScript" + newLine;
 
         String actualOutput = job.toString();
